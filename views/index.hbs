@@ -1,0 +1,25 @@
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+
+<script src="https://js.pusher.com/7.4/pusher.min.js"></script>
+
+<script>
+    Pusher.logToConsole = true;
+    const pusher = new Pusher(
+        "<key here>", // Replace with 'key' from dashboard
+        {
+            cluster: "eu", // Replace with 'cluster' from dashboard
+            userAuthentication: {
+                endpoint: "/pusher/user-auth",
+                transport: "ajax",
+                params: {},
+                headers: {},
+                customHandler: null,
+            },
+        }
+    );
+    pusher.user.bind('pusher:subscription_succeeded', () => {
+        console.log("sign in succeeded")
+    });
+    pusher.signin();
+</script>
